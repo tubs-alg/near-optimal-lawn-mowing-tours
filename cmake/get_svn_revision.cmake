@@ -1,0 +1,5 @@
+find_package(Subversion)
+Subversion_WC_INFO(${GET_SVN_REPOSITORY_PATH} UTIL_SVN)
+file(MAKE_DIRECTORY "${GET_SVN_OUTPUT_DIR}/algutil")
+file(WRITE "${GET_SVN_OUTPUT_DIR}/svn_revision_gen.h" "#ifndef ALGUTIL_SVN_REVISION\n#define ALGUTIL_SVN_REVISION \"${UTIL_SVN_WC_REVISION}\"\n#endif\n")
+execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different "${GET_SVN_OUTPUT_DIR}/svn_revision_gen.h" "${GET_SVN_OUTPUT_DIR}/algutil/svn_revision.h")
