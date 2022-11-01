@@ -1,3 +1,6 @@
+conan_build/
+.idea
+
 ### C++ template
 # Prerequisites
 *.d

@@ -13,7 +13,7 @@
 #include "utils/utils.hpp"
 #include "utils/tours.hpp"
 #include "utils/polygons.hpp"
-#include "mowing/utils/cgal.h"
+#include "utils/cgal.h"
 #include "close_enough_tsp/CETSPSolver.h"
 #include "mowing/utils/mowing.h"
 #include "MowingSolver.h"

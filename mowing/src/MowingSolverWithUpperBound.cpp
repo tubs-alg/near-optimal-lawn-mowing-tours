@@ -111,7 +111,7 @@ namespace mowing {
             // In case anything goes wrong and no tour can be computed we use TSP
             this->updateLowerBound(ex.getPartialSolution().lower_bound);
             std::cout << "Could not generate tour. Using TSP instead." << std::endl;
-            auto tsp_solver = mowing::tsp::TSPSolver(witnesses, this->time);
+            auto tsp_solver = tsp::TSPSolver(witnesses, this->time);
             auto tour = tsp_solver.solve().points;
             return tour;
         }

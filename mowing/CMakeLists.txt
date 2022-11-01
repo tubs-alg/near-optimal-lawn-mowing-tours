@@ -1,11 +1,8 @@
 add_library(mowing
-        src/mowing.cpp
+        src/utils/mowing.cpp
         src/utils/cetsp_tours.cpp
         src/ExactOffsetCalculator.cpp
-        src/TSPSolver.cpp
         src/LowerBoundSolver.cpp
-        src/Christofides.cpp
-        src/FeketeApproximation.cpp
         src/FeasibleToursFromLowerBound.cpp
         src/MowingSolver.cpp
         src/MowingSolverWithUpperBound.cpp
@@ -21,8 +18,10 @@ add_library(mowing
         src/utils/conversion.cpp)
 set_target_properties(mowing PROPERTIES LINKER_LANGUAGE CXX)
 util_setup_target(mowing
-        LIBRARIES close_enough_tsp ${GUROBI} ${_GUROBI_CPP_STATIC_LIB} ${_GUROBI_DLL}
-        INCLUDE_DIRS ${INCLUDE_DIRS}
+        LIBRARIES close_enough_tsp tsp ${GUROBI} ${_GUROBI_CPP_STATIC_LIB} ${_GUROBI_DLL}
+        INCLUDE_DIRS
+        ${INCLUDE_DIRS}
+        ${TSP_INCLUDE_DIR}
         ${CGAL_INCLUDE_DIR}
         ${_GUROBI_CPP_INCLUDE_DIR}
         ${CMAKE_BASE_DIR}/include

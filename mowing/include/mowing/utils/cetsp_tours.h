@@ -1,11 +1,11 @@
-#ifndef TSPN_TOUR_UTILS_H
-#define TSPN_TOUR_UTILS_H
+#ifndef CETSP_TOUR_UTILS_H
+#define CETSP_TOUR_UTILS_H
 
 #include <algorithm>
 #include <vector>
 #include <tuple>
 #include "utils/utils.hpp"
-#include "cgal.h"
+#include "utils/cgal.h"
 #include <algorithm>
 
 namespace mowing {
@@ -21,4 +21,4 @@ namespace mowing {
 }
 
 
-#endif //TSPN_TOUR_UTILS_H
+#endif //CETSP_TOUR_UTILS_H

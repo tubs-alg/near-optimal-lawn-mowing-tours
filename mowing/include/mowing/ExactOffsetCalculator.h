@@ -1,5 +1,5 @@
-#ifndef TSPN_EPECK_OFFSET_CALCULATOR_H
-#define TSPN_EPECK_OFFSET_CALCULATOR_H
+#ifndef CETSP_EPECK_OFFSET_CALCULATOR_H
+#define CETSP_EPECK_OFFSET_CALCULATOR_H
 
 #include <iostream>
 #include <ostream>
@@ -74,4 +74,4 @@ namespace mowing {
 }
 
 
-#endif //TSPN_EPECK_OFFSET_CALCULATOR_H
+#endif //CETSP_EPECK_OFFSET_CALCULATOR_H

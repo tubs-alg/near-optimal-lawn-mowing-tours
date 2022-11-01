@@ -177,7 +177,7 @@ namespace mowing {
         // and solving tsp on the resulting set of points.
         if (!solution.optimal_solution_found && tour.size() > 2) {
             auto startTimeTSPSolver = Clock::now();
-            auto tsp_solver = mowing::tsp::TSPSolver(witnesses, tour, this->time);
+            auto tsp_solver = tsp::TSPSolver(witnesses, tour, this->time);
             auto new_tour = tsp_solver.solve().points;
             auto endTimeTSPSolver = Clock::now();
 

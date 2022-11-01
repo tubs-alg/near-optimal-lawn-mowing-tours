@@ -1,5 +1,5 @@
-#ifndef TSPN_TOURS_H
-#define TSPN_TOURS_H
+#ifndef CETSP_TOURS_H
+#define CETSP_TOURS_H
 
 #include "utils.hpp"
 #include <vector>
@@ -30,4 +30,4 @@ namespace utils {
 
 }
 
-#endif //TSPN_TOURS_H
+#endif //CETSP_TOURS_H

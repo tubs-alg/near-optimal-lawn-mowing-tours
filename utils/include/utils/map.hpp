@@ -1,5 +1,5 @@
-#ifndef TSPN_MAP_HPP
-#define TSPN_MAP_HPP
+#ifndef CETSP_MAP_HPP
+#define CETSP_MAP_HPP
 
 #include <vector>
 #include <iterator>
@@ -38,4 +38,4 @@ namespace utils {
         return result;
     }
 }
-#endif //TSPN_MAP_HPP
+#endif //CETSP_MAP_HPP

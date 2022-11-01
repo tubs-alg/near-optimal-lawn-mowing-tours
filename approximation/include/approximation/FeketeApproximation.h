@@ -15,7 +15,7 @@
 
 #include <CGAL/Boolean_set_operations_2.h>
 
-namespace mowing {
+namespace approximation {
     class FeketeApproximation {
     public:
         typedef std::vector<Point> PointVector;

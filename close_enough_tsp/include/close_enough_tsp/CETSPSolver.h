@@ -1,5 +1,5 @@
-#ifndef TSPN_CETSPSOLVER_H
-#define TSPN_CETSPSOLVER_H
+#ifndef CETSP_CETSPSOLVER_H
+#define CETSP_CETSPSOLVER_H
 
 #include <vector>
 #include <iostream>
@@ -46,4 +46,4 @@ private:
     double initial_upper_bound;
 };
 
-#endif //TSPN_CETSPSOLVER_H
+#endif //CETSP_CETSPSOLVER_H

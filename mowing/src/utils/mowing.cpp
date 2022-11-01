@@ -1,31 +1,13 @@
 #include "mowing/utils/mowing.h"
 
-namespace mowing {
-    namespace utils {
-
-        std::shared_ptr<Segment> minimum_distance(const Point &v, const Point &w, const Point &p) {
-            // Return minimum distance between line segment vw and point p
-            auto l2 = CGAL::squared_distance(v, w);
-
-            // Consider the line extending the segment, parameterized as v + t (w - v).
-            // We find projection of point p onto the line.
-            // It falls where t = [(p-v) . (w-v)] / |w-v|^2
-            // We clamp t from [0,1] to handle points outside the segment vw.
-
-            auto vec1 = Vector_2(v, p);
-            auto vec2 = Vector_2(v, w);
-
-            auto t = CGAL::max((Kernel::FT) 0.0, CGAL::min((Kernel::FT) 1.0, vec1 * vec2 / l2));
-            Point projection = v + t * (w - v);  // Projection falls on the segment
-            return std::make_shared<Segment>(p, projection);
-        }
+namespace mowing::utils {
 
         std::shared_ptr<Segment> shortest_connecting_segment(Polygon_2 &polygon, Point &p) {
 
             std::shared_ptr<Segment> shortest_segment = nullptr;
             for (auto it = polygon.edges_begin(); it != polygon.edges_end(); it++) {
 
-                auto min_dist_segment = minimum_distance(it->source(), it->target(), p);
+                auto min_dist_segment = ::utils::minimum_distance(it->source(), it->target(), p);
 
                 if (shortest_segment == nullptr ||
                     min_dist_segment->squared_length() < shortest_segment->squared_length()) {
@@ -40,11 +22,11 @@ namespace mowing {
 
             auto segments = std::vector<std::shared_ptr<Segment>>();
 
-            if (p != q && p != v) segments.push_back(minimum_distance(p, q, v));
-            if (p != q && p != w) segments.push_back(minimum_distance(p, q, w));
+            if (p != q && p != v) segments.push_back(::utils::minimum_distance(p, q, v));
+            if (p != q && p != w) segments.push_back(::utils::minimum_distance(p, q, w));
 
-            if (v != w && v != p) segments.push_back(minimum_distance(v, w, p));
-            if (v != w && v != q) segments.push_back(minimum_distance(v, w, q));
+            if (v != w && v != p) segments.push_back(::utils::minimum_distance(v, w, p));
+            if (v != w && v != q) segments.push_back(::utils::minimum_distance(v, w, q));
 
             std::shared_ptr<Segment> min_seg = *segments.begin();
 
@@ -129,7 +111,7 @@ namespace mowing {
                                         std::shared_ptr<Segment> &min_seg,
                                         bool &segmentStartInPoly1,
                                         std::pair<Point, Point> &edge_to_split) {
-            auto seg = minimum_distance(source1, target1, source2, target2);
+            auto seg = mowing::utils::minimum_distance(source1, target1, source2, target2);
 
             if (min_seg == nullptr || min_seg->squared_length() > seg->squared_length()) {
                 min_seg = seg;
@@ -472,5 +454,4 @@ namespace mowing {
         }
 
     }
-}
 

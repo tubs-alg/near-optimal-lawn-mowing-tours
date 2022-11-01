@@ -27,20 +27,22 @@ find_package(CGAL REQUIRED)
 find_package(jsoncpp REQUIRED)
 
 add_subdirectory(close_enough_tsp)
+add_subdirectory(tsp)
+add_subdirectory(approximation)
 add_subdirectory(mowing)
 
 message(STATUS "CGAL found at ${CGAL_LIBRARY}")
 
-set(MOWING_INCLUDE_DIRS
-        ${CPLEX_INCLUDE_DIRS}
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/close_enough_tsp/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/mowing/include
+set(MOWING_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/mowing/include
         ${CMAKE_CURRENT_SOURCE_DIR}/utils/include
-        ${jsoncpp_INCLUDE_DIRS}
-        ${CGAL_INCLUDE_DIR})
+        ${jsoncpp_INCLUDE_DIRS})
+
+set(APPROXIMATION_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/approximation/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/utils/include
+        ${jsoncpp_INCLUDE_DIRS})
 
 set(MOWING_LIBRARIES mowing ${jsoncpp_LIBRARIES})
+set(APPROXIMATION_LIBRARIES approximation ${jsoncpp_LIBRARIES})
 
 add_executable(lower_bounds lower_bounds.cpp)
 util_setup_target(lower_bounds
@@ -49,17 +51,17 @@ util_setup_target(lower_bounds
 set_target_properties(lower_bounds PROPERTIES LINKER_LANGUAGE CXX)
 
 
-add_executable(approximation approximation.cpp)
-util_setup_target(approximation
-        LIBRARIES ${MOWING_LIBRARIES}
-        INCLUDE_DIRS ${MOWING_INCLUDE_DIRS})
-set_target_properties(approximation PROPERTIES LINKER_LANGUAGE CXX)
+add_executable(arkin_approximation approximation.cpp)
+util_setup_target(arkin_approximation
+        LIBRARIES ${APPROXIMATION_LIBRARIES}
+        INCLUDE_DIRS ${APPROXIMATION_INCLUDE_DIRS})
+set_target_properties(arkin_approximation PROPERTIES LINKER_LANGUAGE CXX)
 
 
-add_executable(cetsp_solver_from_lb solve_from_lb_solution.cpp)
-util_setup_target(cetsp_solver_from_lb
+add_executable(upper_bounds solve_from_lb_solution.cpp)
+util_setup_target(upper_bounds
         LIBRARIES ${MOWING_LIBRARIES}
         INCLUDE_DIRS ${MOWING_INCLUDE_DIRS})
-set_target_properties(cetsp_solver_from_lb PROPERTIES LINKER_LANGUAGE CXX)
+set_target_properties(upper_bounds PROPERTIES LINKER_LANGUAGE CXX)
 
 add_subdirectory(tests)

@@ -1,5 +1,4 @@
-
-#include <stdlib.h>
+#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <json/writer.h>

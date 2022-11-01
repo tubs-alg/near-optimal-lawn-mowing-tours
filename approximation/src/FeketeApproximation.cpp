@@ -1,6 +1,6 @@
-#include "mowing/FeketeApproximation.h"
+#include "approximation/FeketeApproximation.h"
 
-namespace mowing {
+namespace approximation {
     FeketeApproximation::FeketeApproximation(Polygon_2 &polygon, double radius, double time) {
         this->straight_line_polygon = polygon;
 

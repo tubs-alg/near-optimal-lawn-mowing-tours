@@ -1,6 +1,6 @@
-#include "mowing/TSPSolver.h"
+#include "tsp/TSPSolver.h"
 
-namespace mowing::tsp {
+namespace tsp {
     SubtourElimination::SubtourElimination(GRBVar **vars, std::size_t n) {
         this->vars = vars;
         this->n = n;
@@ -17,7 +17,7 @@ namespace mowing::tsp {
                 for (i = 0; (std::size_t) i < n; i++)
                     x[i] = getSolution(vars[i], (int) n);
 
-                mowing::tsp::findsubtour((int) n, x, &len, tour);
+                tsp::findsubtour((int) n, x, &len, tour);
 
                 if ((std::size_t) len < n) {
                     // Add subtour elimination constraint
@@ -114,7 +114,7 @@ namespace mowing::tsp {
                         break;
                     }
 
-                    auto segment = mowing::utils::minimum_distance(*it, *next, witness);
+                    auto segment = ::utils::minimum_distance(*it, *next, witness);
 
                     if (shortest_dist_segment == nullptr ||
                         segment->squared_length() < shortest_dist_segment->squared_length()) {

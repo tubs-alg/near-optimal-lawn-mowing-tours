@@ -1,31 +1,20 @@
-add_library(mowing
-        src/utils/mowing.cpp
-        src/utils/cetsp_tours.cpp
-        src/ExactOffsetCalculator.cpp
+add_library(tsp
         src/TSPSolver.cpp
-        src/LowerBoundSolver.cpp
-        src/Christofides.cpp
-        src/FeketeApproximation.cpp
-        src/FeasibleToursFromLowerBound.cpp
-        src/MowingSolver.cpp
-        src/MowingSolverWithUpperBound.cpp
-        src/utils/cetsp_tours.cpp
-        src/witnesses/placement/WitnessPlacementStrategy.cpp
-        src/witnesses/placement/initial/ConvexHullPlacementStrategy.cpp
-        src/witnesses/placement/initial/PolygonVerticesPlacementStrategy.cpp
-        src/witnesses/placement/followup/StraightSkeletonPlacementStrategy.cpp
-        src/witnesses/placement/followup/RandomPlacementStrategy.cpp
-        src/witnesses/placement/followup/GridPlacementStrategy.cpp
-        src/witnesses/sparsification/DispersionSparsification.cpp
-        src/witnesses/sparsification/KMeansSparsification.cpp
-        src/utils/conversion.cpp)
-set_target_properties(mowing PROPERTIES LINKER_LANGUAGE CXX)
-util_setup_target(mowing
-        LIBRARIES close_enough_tsp ${GUROBI} ${_GUROBI_CPP_STATIC_LIB} ${_GUROBI_DLL}
-        INCLUDE_DIRS ${INCLUDE_DIRS}
-        ${CGAL_INCLUDE_DIR}
-        ${_GUROBI_CPP_INCLUDE_DIR}
-        ${CMAKE_BASE_DIR}/include
+        src/Christofides.cpp)
+set_target_properties(tsp PROPERTIES LINKER_LANGUAGE CXX)
+util_setup_target(tsp
+        LIBRARIES ${GUROBI} ${_GUROBI_CPP_STATIC_LIB} ${_GUROBI_DLL} ${CGAL_LIBRARY} ${GMP_LIBRARY} ${MPFR_LIBRARY}
+        INCLUDE_DIRS
+        ${CMAKE_CURRENT_LIST_DIR}/include
         ${CMAKE_BASE_DIR}/utils/include
-        ${CMAKE_CURRENT_LIST_DIR}/include)
-set_target_properties(mowing PROPERTIES LINKER_LANGUAGE CXX)
+        ${CMAKE_BASE_DIR}/include
+        ${_GUROBI_CPP_INCLUDE_DIR}
+        ${CGAL_INCLUDE_DIR})
+        #${CGAL_INCLUDE_DIR}
+        #
+        #${CMAKE_BASE_DIR}/include
+        #${CMAKE_BASE_DIR}/utils/include
+        #${CMAKE_CURRENT_LIST_DIR}/include)
+set_target_properties(tsp PROPERTIES LINKER_LANGUAGE CXX)
+
+set(TSP_INCLUDE_DIR ${CMAKE_BASE_DIR}/tsp/include)

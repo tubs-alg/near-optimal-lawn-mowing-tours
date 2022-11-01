@@ -1,11 +1,11 @@
-#ifndef TSPN_MOWING_UTILS_H
-#define TSPN_MOWING_UTILS_H
+#ifndef CETSP_MOWING_UTILS_H
+#define CETSP_MOWING_UTILS_H
 
 #include <algorithm>
 #include <vector>
 #include <tuple>
 #include "utils/utils.hpp"
-#include "cgal.h"
+#include "utils/cgal.h"
 #include "mowing/ExactOffsetCalculator.h"
 
 #include <CGAL/Exact_circular_kernel_2.h>
@@ -16,7 +16,6 @@
 
 namespace mowing::utils {
 
-        std::shared_ptr<Segment> minimum_distance(const Point &v, const Point &w, const Point &p);
         std::shared_ptr<Segment> minimum_distance(Point p, Point q, Point v, Point w);
         std::vector<Point> add_segment_to_tour(Polygon_2 &tour1, Polygon_2 &tour2, std::shared_ptr<Segment> &s,
                                                std::pair<Point, Point> &edge_to_split);
@@ -53,4 +52,4 @@ namespace mowing::utils {
         Rational_Polygon_2 remove_close_points(Rational_Polygon_2 &polygon);
     }
 
-#endif //TSPN_MOWING_UTILS_H
+#endif //CETSP_MOWING_UTILS_H

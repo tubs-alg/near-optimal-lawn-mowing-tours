@@ -276,7 +276,7 @@ namespace mowing {
         }
 
         // Remove duplicate tours (first trying consecutive duplicates as they are more likely)
-        // auto unique_it = std::unique(tour_polygons.begin(), tour_polygons.end(), mowing::utils::equal<Linear_polygon>);
+        // auto unique_it = std::unique(tour_polygons.begin(), tour_polygons.end(), approximation::utils::equal<Linear_polygon>);
         // tour_polygons.resize(std::distance(tour_polygons.begin(), unique_it));
         // Now remove all remaining duplicates with n^2 runtime
         for (auto it = tour_polygons.begin(); it != tour_polygons.end();) {

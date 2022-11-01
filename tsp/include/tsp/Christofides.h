@@ -1,7 +1,6 @@
 #ifndef CETSP_CHRISTOFIDES_H
 #define CETSP_CHRISTOFIDES_H
 
-#include "utils/utils.hpp"
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
@@ -13,71 +12,55 @@
 #include <queue>
 #include <stack>
 #include <string>
-#include <stdio.h>
+#include <cstdio>
 #include <vector>
 #include <limits>
+#include "utils/cgal.h"
 
-class Christofides
-{
-private:
+namespace tsp {
+    class Christofides {
+    private:
 
-    typedef Kernel::FT NT;
-    typedef Kernel::Point_2 Point;
+        typedef Kernel::FT NT;
+        typedef Kernel::Point_2 Point;
 
-    // List of odd nodes
-    std::vector<std::size_t>odds;
+        // List of odd nodes
+        std::vector<std::size_t> odds;
 
-    //Smaller cost matrix to find minimum matching on odd nodes
-    NT **cost;
+        //Smaller cost matrix to find minimum matching on odd nodes
+        NT **cost;
 
-    void findOdds();
-public:
-    // Number of cities
-    std::size_t n;
+        void findOdds();
 
-    //path
-    std::vector<std::pair<std::size_t, NT>> path_vals;
+    public:
+        std::size_t n;
+        std::vector<std::pair<std::size_t, NT>> path_vals;
+        NT pathLength;
+        std::vector<std::size_t> circuit;
+        std::vector<Point> cities;
+        NT **graph;
 
-    //Shortest path length
-    NT pathLength;
+        std::vector<std::size_t> *adjlist;
 
-    //euler circuit
-    std::vector<std::size_t> circuit;
+        Christofides(std::vector<Point> &points);
 
-    std::vector<Point> cities;
+        ~Christofides();
 
-    // n x n, pairwise distances between cities
-    NT **graph;
+        void perfectMatching();
 
-    std::vector<std::size_t>* adjlist;
+        void euler_tour(std::size_t start, std::vector<std::size_t> &path) const;
 
-    // Constructor
-    Christofides(std::vector<Point> &points);
+        void make_hamiltonian(std::vector<std::size_t> &path, NT &pathCost);
 
-    // Destructor
-    ~Christofides();
+        void findMST();
 
-    //Find perfect matching
-    void perfectMatching();
+        std::size_t getMinIndex(NT key[], const bool mst[]);
 
-    //Find Euler tour
-    void euler_tour(std::size_t start, std::vector<std::size_t> &path) const;
+        std::vector<std::size_t> solve();
 
-    //Find Hamiltonian path
-    void make_hamiltonian(std::vector<std::size_t> &path, NT &pathCost);
+        void fillMatrix();
 
-    // Prim's algorithm
-    void findMST();
-
-    std::size_t getMinIndex(NT key[], const bool mst[]);
-
-    std::vector<std::size_t> solve();
-
-    void fillMatrix();
-
-    NT findBestPath(std::size_t start);
-
-};
-
-
+        NT findBestPath(std::size_t start);
+    };
+}
 #endif //CETSP_CHRISTOFIDES_H

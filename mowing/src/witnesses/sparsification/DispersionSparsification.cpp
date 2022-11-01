@@ -21,7 +21,7 @@ namespace mowing {
                 // from the boundary.
                 std::vector<double> distances;
                 for (auto it = inputPolygon->edges_begin(); it != inputPolygon->edges_end(); it++) {
-                    auto s = mowing::utils::minimum_distance(it->source(), it->target(), witness);
+                    auto s = ::utils::minimum_distance(it->source(), it->target(), witness);
                     distances.emplace_back(CGAL::to_double(s->squared_length()));
                 }
                 distances_to_boundary.emplace_back(*std::min_element(distances.begin(), distances.end()));

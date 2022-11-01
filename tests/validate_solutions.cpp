@@ -18,7 +18,7 @@ Polygon_2 polygon_from_cgal_string(const std::string &s) {
     return polygon;
 }
 
-BOOST_AUTO_TEST_CASE(validate_solution)
+BOOST_AUTO_TEST_CASE(validate_solution_ch_grid)
 {
     auto polygon = polygon_from_cgal_string("4 0 0 0 2 10 2 10 0");
     auto solver = mowing::LowerBoundSolver(polygon, mowing::definitions::INITIAL_STRATEGY_CH,
@@ -39,6 +39,110 @@ BOOST_AUTO_TEST_CASE(validate_solution)
     BOOST_CHECK_LT(std::abs(solution.lower_bound - (20 - std::sqrt(3))), 1e-1);
 }
 
+BOOST_AUTO_TEST_CASE(validate_solution_ch_random)
+{
+    auto polygon = polygon_from_cgal_string("4 0 0 0 2 10 2 10 0");
+    auto solver = mowing::LowerBoundSolver(polygon, mowing::definitions::INITIAL_STRATEGY_CH,
+                                           mowing::definitions::FOLLOWUP_STRATEGY_RANDOM,
+                                           1.0, 1800,
+                                           4,
+                                           50, 3);
+
+    auto solution = solver.solve();
+
+    /**
+     * An optimal tour in that rectangle should have size 20-sqrt(3), i.e. two identical straight lines across
+     * the polygon.
+     */
+
+    BOOST_TEST_MESSAGE("Checking the tour length");
+    BOOST_CHECK_EQUAL(CGAL::to_double(CGAL::abs(polygon.area())), 20);
+    BOOST_CHECK_LT(std::abs(solution.lower_bound - (20 - std::sqrt(3))), 1e-1);
+}
+
+BOOST_AUTO_TEST_CASE(validate_solution_ch_skeleton)
+{
+    auto polygon = polygon_from_cgal_string("4 0 0 0 2 10 2 10 0");
+    auto solver = mowing::LowerBoundSolver(polygon, mowing::definitions::INITIAL_STRATEGY_CH,
+                                           mowing::definitions::FOLLOWUP_STRATEGY_SKELETON,
+                                           1.0, 1800,
+                                           4,
+                                           50, 3);
+
+    auto solution = solver.solve();
+
+    /**
+     * An optimal tour in that rectangle should have size 20-sqrt(3), i.e. two identical straight lines across
+     * the polygon.
+     */
+
+    BOOST_TEST_MESSAGE("Checking the tour length");
+    BOOST_CHECK_EQUAL(CGAL::to_double(CGAL::abs(polygon.area())), 20);
+    BOOST_CHECK_LT(std::abs(solution.lower_bound - (20 - std::sqrt(3))), 1e-1);
+}
+
+BOOST_AUTO_TEST_CASE(validate_solution_boundary_grid)
+{
+    auto polygon = polygon_from_cgal_string("4 0 0 0 2 10 2 10 0");
+    auto solver = mowing::LowerBoundSolver(polygon, mowing::definitions::INITIAL_STRATEGY_VERTICES,
+                                           mowing::definitions::FOLLOWUP_STRATEGY_GRID,
+                                           1.0, 1800,
+                                           4,
+                                           50, 3);
+
+    auto solution = solver.solve();
+
+    /**
+     * An optimal tour in that rectangle should have size 20-sqrt(3), i.e. two identical straight lines across
+     * the polygon.
+     */
+
+    BOOST_TEST_MESSAGE("Checking the tour length");
+    BOOST_CHECK_EQUAL(CGAL::to_double(CGAL::abs(polygon.area())), 20);
+    BOOST_CHECK_LT(std::abs(solution.lower_bound - (20 - std::sqrt(3))), 1e-1);
+}
+
+BOOST_AUTO_TEST_CASE(validate_solution_boundary_random)
+{
+    auto polygon = polygon_from_cgal_string("4 0 0 0 2 10 2 10 0");
+    auto solver = mowing::LowerBoundSolver(polygon, mowing::definitions::INITIAL_STRATEGY_VERTICES,
+                                           mowing::definitions::FOLLOWUP_STRATEGY_RANDOM,
+                                           1.0, 1800,
+                                           4,
+                                           50, 3);
+
+    auto solution = solver.solve();
+
+    /**
+     * An optimal tour in that rectangle should have size 20-sqrt(3), i.e. two identical straight lines across
+     * the polygon.
+     */
+
+    BOOST_TEST_MESSAGE("Checking the tour length");
+    BOOST_CHECK_EQUAL(CGAL::to_double(CGAL::abs(polygon.area())), 20);
+    BOOST_CHECK_LT(std::abs(solution.lower_bound - (20 - std::sqrt(3))), 1e-1);
+}
+
+BOOST_AUTO_TEST_CASE(validate_solution_boundary_skeleton)
+{
+    auto polygon = polygon_from_cgal_string("4 0 0 0 2 10 2 10 0");
+    auto solver = mowing::LowerBoundSolver(polygon, mowing::definitions::INITIAL_STRATEGY_VERTICES,
+                                           mowing::definitions::FOLLOWUP_STRATEGY_SKELETON,
+                                           1.0, 1800,
+                                           4,
+                                           50, 3);
+
+    auto solution = solver.solve();
+
+    /**
+     * An optimal tour in that rectangle should have size 20-sqrt(3), i.e. two identical straight lines across
+     * the polygon.
+     */
+
+    BOOST_TEST_MESSAGE("Checking the tour length");
+    BOOST_CHECK_EQUAL(CGAL::to_double(CGAL::abs(polygon.area())), 20);
+    BOOST_CHECK_LT(std::abs(solution.lower_bound - (20 - std::sqrt(3))), 1e-1);
+}
 
 BOOST_AUTO_TEST_CASE(validate_inequalities)
 {

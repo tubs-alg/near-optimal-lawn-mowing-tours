@@ -1,5 +1,5 @@
-#ifndef TSPN_SHORTEST_PATH_SOLVER_H
-#define TSPN_SHORTEST_PATH_SOLVER_H
+#ifndef CETSP_SHORTEST_PATH_SOLVER_H
+#define CETSP_SHORTEST_PATH_SOLVER_H
 
 #include <vector>
 #include <iostream>
@@ -45,4 +45,4 @@ private:
     double initial_upper_bound;
 };
 
-#endif //TSPN_SHORTEST_PATH_SOLVER_H
+#endif //CETSP_SHORTEST_PATH_SOLVER_H

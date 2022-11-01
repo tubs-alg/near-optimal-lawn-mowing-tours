@@ -1,5 +1,5 @@
-#ifndef TSPN_POLYGONS_H
-#define TSPN_POLYGONS_H
+#ifndef CETSP_POLYGONS_H
+#define CETSP_POLYGONS_H
 
 #include "utils.hpp"
 #include <random>
@@ -69,4 +69,4 @@ namespace utils {
 
 }
 
-#endif //TSPN_POLYGONS_H
+#endif //CETSP_POLYGONS_H

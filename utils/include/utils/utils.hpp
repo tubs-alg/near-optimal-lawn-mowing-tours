@@ -1,5 +1,5 @@
-#ifndef TSPN_UTILS_HPP
-#define TSPN_UTILS_HPP
+#ifndef CETSP_UTILS_HPP
+#define CETSP_UTILS_HPP
 
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
@@ -54,8 +54,8 @@ inline std::istream &operator>>(std::istream &is, std::vector<Point> &out) {
 
 inline std::ostream &operator<<(std::ostream &os, const std::vector<Point> &in) {
     os << in.size() << ' ';
-    for (auto i = in.begin(); i != in.end(); ++i) {
-        os << *i << ' ';
+    for (const auto &i: in) {
+        os << i << ' ';
     }
     return os;
 }
@@ -71,21 +71,40 @@ namespace utils {
     }
 
 
-    template <typename Ref>
+    template<typename Ref>
     struct lvalue_or_rvalue {
 
         Ref &&ref;
 
-        template <typename Arg>
+        template<typename Arg>
         constexpr lvalue_or_rvalue(Arg &&arg) noexcept
-                :   ref(std::move(arg))
-        { }
+                :   ref(std::move(arg)) {}
 
-        constexpr operator Ref& () const & noexcept { return ref; }
-        constexpr operator Ref&& () const && noexcept { return std::move(ref); }
-        constexpr Ref& operator*() const noexcept { return ref; }
-        constexpr Ref* operator->() const noexcept { return &ref; }
+        constexpr operator Ref &() const & noexcept { return ref; }
+
+        constexpr operator Ref &&() const && noexcept { return std::move(ref); }
+
+        constexpr Ref &operator*() const noexcept { return ref; }
+
+        constexpr Ref *operator->() const noexcept { return &ref; }
 
     };
+
+    inline std::shared_ptr<Segment> minimum_distance(const Point &v, const Point &w, const Point &p) {
+        // Return minimum distance between line segment vw and point p
+        auto l2 = CGAL::squared_distance(v, w);
+
+        // Consider the line extending the segment, parameterized as v + t (w - v).
+        // We find projection of point p onto the line.
+        // It falls where t = [(p-v) . (w-v)] / |w-v|^2
+        // We clamp t from [0,1] to handle points outside the segment vw.
+
+        auto vec1 = Vector_2(v, p);
+        auto vec2 = Vector_2(v, w);
+
+        auto t = CGAL::max((Kernel::FT) 0.0, CGAL::min((Kernel::FT) 1.0, vec1 * vec2 / l2));
+        Point projection = v + t * (w - v);  // Projection falls on the segment
+        return std::make_shared<Segment>(p, projection);
+    }
 }
 #endif

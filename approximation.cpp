@@ -4,9 +4,9 @@
 #include <json/writer.h>
 #include <algorithm>
 #include "utils/utils.hpp"
-#include "mowing/FeketeApproximation.h"
+#include "approximation/FeketeApproximation.h"
 
-void exportJson(const std::string &out_file, mowing::FeketeApproximation::solution &solution) {
+void exportJson(const std::string &out_file, approximation::FeketeApproximation::solution &solution) {
     Json::Value result;
 
     Json::Value polygonJson(Json::arrayValue);
@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
     std::cout << "Input polygon is simple " << polygon.is_simple() << " and has area " << polygon.area() << std::endl;
 
     try {
-        auto solver = mowing::FeketeApproximation(polygon, radius, time);
+        auto solver = approximation::FeketeApproximation(polygon, radius, time);
         auto solution = solver.solve();
 
         std::cout << "Polygon: " << polygon << std::endl;
