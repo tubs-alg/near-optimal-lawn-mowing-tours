@@ -1,7 +1,13 @@
 [requires]
-boost/1.80.0
-cgal/5.5.1
+boost/1.82.0
+cgal/5.5.2
 jsoncpp/1.9.5
+gurobi/[>=10.0.0]
+doctest/2.4.11
+
+[layout]
+cmake_layout
 
 [generators]
-cmake_find_package
+CMakeToolchain
+CMakeDeps

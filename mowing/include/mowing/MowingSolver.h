@@ -14,7 +14,7 @@
 #include "utils/tours.hpp"
 #include "utils/polygons.hpp"
 #include "utils/cgal.h"
-#include "close_enough_tsp/CETSPSolver.h"
+#include "cetsp/solver.h"
 #include "ExactOffsetCalculator.h"
 #include "mowing/utils/mowing.h"
 #include "tsp/TSPSolver.h"

@@ -17,13 +17,13 @@ add_library(mowing
         src/witnesses/sparsification/KMeansSparsification.cpp
         src/utils/conversion.cpp)
 set_target_properties(mowing PROPERTIES LINKER_LANGUAGE CXX)
-util_setup_target(mowing
-        LIBRARIES close_enough_tsp tsp ${GUROBI} ${_GUROBI_CPP_STATIC_LIB} ${_GUROBI_DLL}
-        INCLUDE_DIRS
+target_link_libraries(mowing PUBLIC
+        cetsp tsp
+        gurobi::gurobi)
+target_include_directories(mowing PUBLIC
         ${INCLUDE_DIRS}
         ${TSP_INCLUDE_DIR}
-        ${CGAL_INCLUDE_DIR}
-        ${_GUROBI_CPP_INCLUDE_DIR}
+        ${CMAKE_BASE_DIR}/close_enough_tsp/include
         ${CMAKE_BASE_DIR}/include
         ${CMAKE_BASE_DIR}/utils/include
         ${CMAKE_CURRENT_LIST_DIR}/include)

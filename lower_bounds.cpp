@@ -103,13 +103,13 @@ int main(int argc, char *argv[]) {
     std::string line;
     std::string file_name = argv[1];
     std::string out_file = argv[2];
-    auto initial_strategy = (int) stoul(argv[3]);
-    auto followup_strategy = (int) stoul(argv[4]);
+    auto initial_strategy = (int) std::stoul(argv[3]);
+    auto followup_strategy = (int) std::stoul(argv[4]);
     double time = atof(argv[5]);
     double radius = atof(argv[6]);
-    auto max_witness_size_initial = (std::size_t) stoul(argv[7]);
-    auto max_witness_size = (std::size_t) stoul(argv[8]);
-    auto max_iterations = (std::size_t) stoul(argv[9]);
+    auto max_witness_size_initial = (std::size_t) std::stoul(argv[7]);
+    auto max_witness_size = (std::size_t) std::stoul(argv[8]);
+    auto max_iterations = (std::size_t) std::stoul(argv[9]);
 
     std::ifstream input_file (file_name);
     if (!input_file.is_open()) {

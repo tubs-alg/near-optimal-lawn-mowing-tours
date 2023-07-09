@@ -142,12 +142,9 @@ namespace mowing {
 
         // Solve CETSP and measure the time
         auto startTimeSolver = Clock::now();
-        // If the start point is given we pass it as an initial point. Else use the default solver without a start.
-        auto solver = start_point ? CETSPSolver(witnesses, *start_point, this->radius, this->time) :
-                      CETSPSolver(witnesses, this->radius, this->time);
-        auto solution = solver.solve();
-        auto endTimeSolver = Clock::now();
+        auto solution = cetsp::solve(witnesses, start_point, this->radius, this->time);
 
+        auto endTimeSolver = Clock::now();
         auto &tour = solution.points;
 
         auto extended_solution = cetsp_extended_solution{
@@ -202,7 +199,7 @@ namespace mowing {
     double MowingSolver::calculateTime(::utils::lvalue_or_rvalue<Clock::time_point> start,
                                        ::utils::lvalue_or_rvalue<Clock::time_point> end) {
         using std::chrono::milliseconds;
-        return ((chrono::duration<double, std::milli>) (*end - *start)).count();
+        return ((std::chrono::duration<double, std::milli>) (*end - *start)).count();
     }
 
     void MowingSolver::updateLowerBound(const Kernel::FT &lb) {
