@@ -47,12 +47,6 @@ set(APPROXIMATION_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/approximation/include
 set(MOWING_LIBRARIES mowing ${jsoncpp_LIBRARIES})
 set(APPROXIMATION_LIBRARIES approximation ${jsoncpp_LIBRARIES})
 
-add_executable(test test.cpp)
-target_link_libraries(test ${cgal_LIBRARIES})
-target_include_directories(test PUBLIC ${cgal_INCLDUE_DIRS})
-set_target_properties(test PROPERTIES LINKER_LANGUAGE CXX)
-
-
 add_executable(lower_bounds lower_bounds.cpp)
 target_link_libraries(lower_bounds ${MOWING_LIBRARIES})
 target_include_directories(lower_bounds PUBLIC ${MOWING_INCLUDE_DIRS})

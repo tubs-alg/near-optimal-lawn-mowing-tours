@@ -57,26 +57,27 @@ if __name__ == "__main__":
     with open(os.path.join(args.out_dir, "config.json"), "w") as f:
         json.dump(vars(args), f)
 
-    for file in tqdm([f for f in os.listdir(args.dir) if f.endswith('.poly')]):
-        input_file = os.path.join(args.dir, file)
-        output_file = os.path.join(args.out_dir, file.replace('.poly', '_raw.out'))
-        output_json = os.path.join(args.out_dir, file.replace('.poly', '.json'))
+    with slurminade.Batch(max_size=5) as batch:
+        for file in tqdm([f for f in os.listdir(args.dir) if f.endswith('.poly')]):
+            input_file = os.path.join(args.dir, file)
+            output_file = os.path.join(args.out_dir, file.replace('.poly', '_raw.out'))
+            output_json = os.path.join(args.out_dir, file.replace('.poly', '.json'))
 
-        if os.path.isfile(output_json):
-            print("Output for", output_json, "already present")
-            continue
+            if os.path.isfile(output_json):
+                print("Output for", output_json, "already present")
+                continue
 
-        if os.path.isfile(output_file):
-            os.remove(output_file)
-            print("Removed output file", output_file)
+            if os.path.isfile(output_file):
+                os.remove(output_file)
+                print("Removed output file", output_file)
 
-        execute.distribute(output_file,
-                           [args.executable, input_file,
-                            output_json,
-                            str(args.initial_strategy),
-                            str(args.followup_strategy),
-                            str(args.time),
-                            str(args.radius),
-                            str(args.max_initial_witnesses),
-                            str(args.max_witnesses),
-                            str(args.max_iterations)])
+            execute.distribute(output_file,
+                               [args.executable, input_file,
+                                output_json,
+                                str(args.initial_strategy),
+                                str(args.followup_strategy),
+                                str(args.time),
+                                str(args.radius),
+                                str(args.max_initial_witnesses),
+                                str(args.max_witnesses),
+                                str(args.max_iterations)])
