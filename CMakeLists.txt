@@ -52,7 +52,7 @@ target_link_libraries(lower_bounds ${MOWING_LIBRARIES})
 target_include_directories(lower_bounds PUBLIC ${MOWING_INCLUDE_DIRS})
 set_target_properties(lower_bounds PROPERTIES LINKER_LANGUAGE CXX)
 
-add_executable(arkin_approximation approximation.cpp test.cpp)
+add_executable(arkin_approximation approximation.cpp)
 util_setup_target(arkin_approximation
         LIBRARIES ${APPROXIMATION_LIBRARIES}
         INCLUDE_DIRS ${APPROXIMATION_INCLUDE_DIRS})
