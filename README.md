@@ -13,7 +13,7 @@ For solving the TSP, our exact solver uses Christofides approximation as a start
 Note that this code needs additional libraries to work: The commercial CPLEX and Gurobi library. All other dependencies can be installed
 using the Conan package manager
 ```
-conan install . -of conan_build --build=missing
+conan install . -of cmake-build-debug --build=missing -s build_type=Debug
 ```
 
 The executable targets are `arkin_approximation`, `lower_bounds` and `upper_bounds`.

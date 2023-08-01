@@ -1,0 +1,3 @@
+add_library(approximation FeketeApproximation.cpp)
+set_target_properties(approximation PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(approximation tsp)

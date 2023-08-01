@@ -1,5 +1,9 @@
 conan_build/
 .idea
+CMakeUserPresets.json
+Core_Diagnostics
+
+venv/
 
 ### C++ template
 # Prerequisites
